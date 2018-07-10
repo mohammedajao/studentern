@@ -1,0 +1,42 @@
+
+// Fonts
+@font-face {
+	font-family: "FontAwesome";
+	font-weight: normal;
+	font-style : normal;
+				 src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?v=4.3.0");
+				 src : url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.eot?#iefix&v=4.3.0") format("embedded-opentype"),
+							 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff2?v=4.3.0") format("woff2"),
+							 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.woff?v=4.3.0") format("woff"),
+							 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.ttf?v=4.3.0") format("truetype"),
+							 url("https://maxcdn.bootstrapcdn.com/font-awesome/4.3.0/fonts/fontawesome-webfont.svg?v=4.3.0#fontawesomeregular") format("svg");
+	}
+	
+@import url("https://fonts.googleapis.com/css?family=Raleway:300,400,600");
+
+// Variables
+@import "variables";
+
+// Bootstrap
+@import '~bootstrap/scss/bootstrap';
+
+@import 'navbar';
+@import 'article';
+
+.btn-custom {
+	max-width: 150px;
+	border: 2px solid #e5e5e5;
+	border-radius: 2px;
+	transition: all .2s ease;
+	text-transform: uppercase;
+	font-weight: 800;
+}
+
+.btn-custom:hover {
+	box-shadow: 0 2px 7px rgba(0,0,0,.2);
+	border-color: transparent;
+	border-radius: 0;
+	background-color: #2ebaae;
+	color: white;
+}
+
