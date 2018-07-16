@@ -1,10 +1,13 @@
 @extends('layouts.layout')
 
 @section('content')
+<div class="container">
   <section class="articles">
+    @auth
     <a href="articles/create" class="btn btn-custom create-button">
       + Create Post
     </a>
+    @endauth
     <section class="featured-news">
       <div class="header category__header">
         <h2 class="category__title">Featured News</h2>
@@ -60,4 +63,5 @@
       @endforeach
     </section>
   </section>
+</div>
 @endsection

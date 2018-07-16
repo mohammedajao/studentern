@@ -1,6 +1,7 @@
 @extends('layouts.layout')
 
 @section('content')
+<div class="container">
 <section class="articles">
     <section class="latest-news">
       <div class="header category__header">
@@ -25,4 +26,5 @@
       {{$articles->links()}}
     </section>
   </section>
+</div>
 @endsection

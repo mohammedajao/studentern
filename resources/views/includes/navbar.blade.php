@@ -4,9 +4,6 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav mr-auto">
       <li class="nav-item">
-        <a class="" href="/">Home <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
         <a class="" href="/about">About</a>
       </li>
       <li class="nav-item">
@@ -15,12 +12,31 @@
       <li class="nav-item">
         <a class="" href="/leaderboard">Leaderboard</a>
       </li>
+      @guest
       <li class="nav-item">
-        <a class="" href="/">Login</a>
+        <a class="" href="{{ route('login') }}">Login</a>
       </li>
       <li class="nav-item">
-        <a class="" href="/">Register</a>
+        <a class="" href="{{ route('register') }}">Register</a>
       </li>
+      @else
+      <li class="nav-item dropdown">
+        <a href="" onclick="event.preventDefault();">You <span class="fas fa-caret-down"></span></a>
+        <div class="dropdown-container">
+          <div class="animated fadeOutDown sdropdown-menu">
+            <ul class="sdropdown-content">
+              <li class="sdropdown-item"><a href="/dashboard">Dashboard</a></li>
+              <li class="sdropdown-item" onclick="event.preventDefault();document.getElementById('logout-form').submit();">
+                <a href="">{{ __('Logout') }}</a>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                  @csrf
+                </form>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </li>
+      @endguest
     </ul>
   </div>
 
@@ -53,8 +69,13 @@
   <section>
     <ul class="sidenav-nav">
       <li class="nav-citem">
-        <a>Home</a>
+        <a href="/">Home</a>
       </li>
+      @auth
+      <li class="nav-citem">
+        <a href="/dashboard">Dashboard</a>
+      </li>
+      @endguest
       <li class="nav-citem">
         <a href="/about">About</a>
       </li>
@@ -64,12 +85,22 @@
       <li class="nav-citem">
         <a class="" href="/leaderboard">Leaderboard</a>
       </li>
+      @guest
       <li class="nav-citem">
-        <a class="" href="/">Login</a>
+        <a class="" href="{{ route('login') }}">Login</a>
       </li>
       <li class="nav-citem">
-        <a class="" href="/">Register</a>
+        <a class="" href="{{ route('register') }}">Register</a>
       </li>
+      @else 
+      <li class="nav-citem">
+        <a class="" href="" onclick="event.preventDefault();
+                      document.getElementById('logout-form').submit();">{{ __('Logout') }}</a>
+        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+          @csrf
+        </form>
+      </li>
+      @endguest
     </ul>
   </section>
   <section class="text-center">

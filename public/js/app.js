@@ -35935,7 +35935,7 @@ $('#searchButton').click(function () {
 
 $('.submenu-expansion').click(function () {
 	$('.sidenav').css('transform', 'translateX(0)');
-	$('.fader').css({ 'opacity': '1', 'z-index': '0' });
+	$('.fader').css({ 'opacity': '1', 'z-index': '10' });
 });
 
 $('.fader').click(function () {

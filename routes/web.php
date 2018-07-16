@@ -17,3 +17,8 @@ Route::get('/leaderboard', 'PagesController@leaderboard');
 
 Route::resource('articles', 'ArticlesController');
 Route::get('article/{category}', 'ArticlesController@display');
+Route::post('/likes/{type}/{id}', 'Articlesontroller@actOnLike');
+
+Auth::routes();
+
+Route::get('/dashboard', 'DashboardController@index')->name('dashboard');

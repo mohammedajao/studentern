@@ -9,10 +9,11 @@ $('#searchButton').click(() => {
 
 $('.submenu-expansion').click(() => {
 	$('.sidenav').css('transform', 'translateX(0)')
-	$('.fader').css({'opacity': '1', 'z-index' : '0'})
+	$('.fader').css({'opacity': '1', 'z-index' : '10'})
 })
 
 $('.fader').click(() => {
 	$('.sidenav').css('transform', 'translateX(28em)')
 	$('.fader').css({'opacity': '0', 'z-index' : '-1'})
 })
+
