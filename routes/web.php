@@ -17,7 +17,8 @@ Route::get('/leaderboard', 'PagesController@leaderboard');
 
 Route::resource('articles', 'ArticlesController');
 Route::get('article/{category}', 'ArticlesController@display');
-Route::post('/likes/{type}/{id}', 'Articlesontroller@actOnLike');
+
+Route::post('likes', 'LikeController@store');
 
 Auth::routes();
 

@@ -13,6 +13,7 @@ class Like extends Model
      * @var array
      */
 
+    protected $primaryKey = 'user_id';
     protected $fillable = [
         'user_id',
         'likeable_id',
@@ -21,11 +22,11 @@ class Like extends Model
     ];
 
     public function article() {
-        return $this->belongsTo('App\Article');
+        return $this->morphedByMany('App\Article', 'likeable');
     }
 
     public function user() {
-        return $this->belongsTo('App\User');
+        return $this->morphedByMany('App\User', 'likeable');
     }
 
 }

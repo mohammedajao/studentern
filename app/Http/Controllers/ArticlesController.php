@@ -5,9 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Article;
 use App\Like;
+use App\Events\NewLike;
 
 class ArticlesController extends Controller
 {
+
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     /**
      * Display a listing of the resource.
      *
@@ -61,11 +67,7 @@ class ArticlesController extends Controller
     {
         //
         $article = Article::find($id);
-        $likes = Like::where(['likeable_type' => 'article', 'likeable_id' => $article->id])->get();
-        $owned_like = Like::where(['likeable_type' => 'article', 'likeable_id' => $article->id, 'user_id' => auth()->user()->id])->get();
-        // return auth()->user()->likes()->where(['likeable_type' => 'article', 'likeable_id' => $article->id, 'user_id' => auth()->user()->id])->get();
-        // return Like::where(['likeable_type' => 'article', 'likeable_id' => $article->id])->get();
-        return view('articles.show')->with(['article' => $article, 'likes' => $likes, 'liked' => $owned_like]);
+        return view('articles.show')->with('article', $article);
     }
 
     /**
@@ -108,6 +110,39 @@ class ArticlesController extends Controller
         return view('articles.display')->with('category', $category)->with('articles', $articles);
     }
 
+    public function likedArticle(Request $request)
+    {
+        $id = $request['id'];
+        $article = Article::findOrFail($id);
+        $user_id = Auth::user()->id;
+        $like = Like::where(['likeable_id' => $article->id, 'user_id' => $user_id]);
+        $like_type = $possibleLike->like_type;
+
+        // check if article exists
+
+        if(!$like) {
+            $like = new Like([
+                'user_id' => $user_id,
+                'like_type' => 'like',
+                'likeable_id' => $article->id,
+                'likeable_type' => 'article'
+            ]);
+        } else {
+            if($like->like_type == 'like') {
+                $like->like_type == 'dislike';
+            } else if($like->like_type == 'dislike') {
+                $like->like_type == 'like';
+            }
+        }
+        $like->save();
+
+        event(new NewLike($like));
+
+
+        return redirect('/articles'.$article->id);
+    }
+
+
     public function likeArticle(Request $request)
     {
         // $article_id = $request['article_id'];
@@ -144,8 +179,8 @@ class ArticlesController extends Controller
         if(!$like) {
             $like = new Like();
         }
-        
-        switch($action) 
+
+        switch($action)
         {
             case 'like':
                 Article::where('id', $article_id)->increment('likes');

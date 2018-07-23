@@ -14,27 +14,15 @@
           <div class="creator" style="">
             <a  href="/" style="">
               <span class="article-author-name" style=""><span class="m-0">@</span>{{ str_replace(" ", "_", $article->user->name)}}</span>
-              <img style="" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png">  
+              <img style="" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png">
             </a>
           </div>
         </div>
-        <!-- <div class="d-md-none text-center" style="clear: both">
-          <span class="article-author-name" style=""><span class="m-0">@</span>{{$article->user->name}}</span>
-          <img style="" class="article-user-image" src="https://abs.twimg.com/sticky/default_profile_images/default_profile_normal.png">  
-        </div> -->
       </header>
-
-      @auth
-      <footer>
-      </ul>
-        <ul class="stats float-right" style="">
-          <li style=""> 
-            <a href="" onclick="event.preventDefault(); actOnArticle()"><span class="d-none">Like</span><i @if(count($liked) > 0) class="fas fa-heart like-button like-button-blue" @else class="fas fa-heart like-button" @endif data-article-id={{$article->id}} style=""></i></a>
-            <span>{{count($likes)}}</span>
-          </li>
-        </ul>
-      </footer>
-      @endauth
+      {{Auth::user()->likes()->where(['like_type' => 'like', 'likeable_id' => $article->id])->first()}}
+      <like-component article-id={{ $article->id }}
+        likes={{ $article->likes()->where('like_type', 'like')->count() }}
+        user-liked={{ $article->likes()->where(['user_id' => auth()->user()->id, 'like_type' => 'like'])->count() }}></like-component>
     </div>
   </div>
 </div>

@@ -41,12 +41,16 @@
           color: #2ebaae;
         }
 
-        .like-button:hover {
+        .like-button-hoverable:hover {
           color: #2ebaae;
         }
 
         .like-button-blue {
           color: #2ebaae;
+        }
+
+        .like-button-dislikeable:hover {
+          color: rgba(160, 160, 160, 0.3);
         }
       }
     }
@@ -335,7 +339,7 @@
     .headline {
       text-align: center;
     }
-  
+
     .meta {
       display: flex;
       flex-direction: column;

@@ -31,7 +31,12 @@ class User extends Authenticatable
         return $this->hasMany('App\Article');
     }
 
-    public function likes() {
-        return $this->hasMany('App\Like');
+    // public function likes() {
+    //     return $this->hasMany('App\Like');
+    // }
+
+    public function likes() 
+    {
+        return $this->morphMany('App\Like', 'likeable');
     }
 }

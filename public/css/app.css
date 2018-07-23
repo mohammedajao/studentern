@@ -10860,12 +10860,16 @@ button:focus {
   color: #2ebaae;
 }
 
-.article-card ul.stats li .like-button:hover {
+.article-card ul.stats li .like-button-hoverable:hover {
   color: #2ebaae;
 }
 
 .article-card ul.stats li .like-button-blue {
   color: #2ebaae;
+}
+
+.article-card ul.stats li .like-button-dislikeable:hover {
+  color: rgba(160, 160, 160, 0.3);
 }
 
 .article-card .meta {
